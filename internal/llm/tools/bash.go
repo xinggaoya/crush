@@ -191,7 +191,7 @@ git commit -m "$(cat <<'EOF'
 		PRAttribution:      prAttribution,
 	}); err != nil {
 		// this should never happen.
-		panic("failed to execute bash description template: " + err.Error())
+		return fmt.Sprintf("Error: failed to execute bash description template: %s", err.Error())
 	}
 	return out.String()
 }

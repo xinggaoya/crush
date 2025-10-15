@@ -20,7 +20,8 @@ import (
 func TestMain(m *testing.M) {
 	_, err := config.Init(".", "", true)
 	if err != nil {
-		panic("Failed to initialize config: " + err.Error())
+		fmt.Printf("Failed to initialize config: %s\n", err.Error())
+		os.Exit(1)
 	}
 
 	os.Exit(m.Run())

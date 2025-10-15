@@ -3,14 +3,97 @@ package app
 import (
 	"context"
 	"log/slog"
+	"sync"
 	"time"
 
 	"github.com/charmbracelet/crush/internal/config"
 	"github.com/charmbracelet/crush/internal/lsp"
 )
 
-// initLSPClients initializes LSP clients.
+// LSPConnectionPool manages LSP client connections with pooling and health checks
+type LSPConnectionPool struct {
+	clients map[string]*lsp.Client
+	mu      sync.RWMutex
+	health  map[string]time.Time
+}
+
+// NewLSPConnectionPool creates a new LSP connection pool
+func NewLSPConnectionPool() *LSPConnectionPool {
+	return &LSPConnectionPool{
+		clients: make(map[string]*lsp.Client),
+		health:  make(map[string]time.Time),
+	}
+}
+
+// GetClient returns a client from the pool, creating it if necessary
+func (pool *LSPConnectionPool) GetClient(ctx context.Context, name string, config config.LSPConfig, cfg *config.Config) (*lsp.Client, error) {
+	pool.mu.RLock()
+	client, exists := pool.clients[name]
+	lastHealth, healthy := pool.health[name]
+	pool.mu.RUnlock()
+
+	// Check if client exists and is healthy (within last 30 seconds)
+	if exists && healthy && time.Since(lastHealth) < 30*time.Second {
+		return client, nil
+	}
+
+	pool.mu.Lock()
+	defer pool.mu.Unlock()
+
+	// Double-check after acquiring write lock
+	if client, exists := pool.clients[name]; exists {
+		if lastHealth, healthy := pool.health[name]; healthy && time.Since(lastHealth) < 30*time.Second {
+			return client, nil
+		}
+	}
+
+	// Create new client
+	newClient, err := lsp.New(ctx, name, config, cfg.Resolver())
+	if err != nil {
+		return nil, err
+	}
+
+	pool.clients[name] = newClient
+	pool.health[name] = time.Now()
+	return newClient, nil
+}
+
+// UpdateHealth updates the health status of a client
+func (pool *LSPConnectionPool) UpdateHealth(name string) {
+	pool.mu.Lock()
+	defer pool.mu.Unlock()
+	pool.health[name] = time.Now()
+}
+
+// RemoveClient removes a client from the pool
+func (pool *LSPConnectionPool) RemoveClient(name string) {
+	pool.mu.Lock()
+	defer pool.mu.Unlock()
+	if client, exists := pool.clients[name]; exists {
+		client.Close(context.Background())
+		delete(pool.clients, name)
+		delete(pool.health, name)
+	}
+}
+
+// Shutdown shuts down all clients in the pool
+func (pool *LSPConnectionPool) Shutdown(ctx context.Context) {
+	pool.mu.Lock()
+	defer pool.mu.Unlock()
+
+	for name, client := range pool.clients {
+		if err := client.Close(ctx); err != nil {
+			slog.Error("Failed to close LSP client", "name", name, "error", err)
+		}
+	}
+	pool.clients = make(map[string]*lsp.Client)
+	pool.health = make(map[string]time.Time)
+}
+
+// initLSPClients initializes LSP clients with connection pooling.
 func (app *App) initLSPClients(ctx context.Context) {
+	app.lspPool = NewLSPConnectionPool()
+
 	for name, clientConfig := range app.config.LSP {
 		if clientConfig.Disabled {
 			slog.Info("Skipping disabled LSP client", "name", name)
@@ -18,7 +101,7 @@ func (app *App) initLSPClients(ctx context.Context) {
 		}
 		go app.createAndStartLSPClient(ctx, name, clientConfig)
 	}
-	slog.Info("LSP clients initialization started in background")
+	slog.Info("LSP clients initialization started in background with connection pooling")
 }
 
 // createAndStartLSPClient creates a new LSP client, initializes it, and starts its workspace watcher

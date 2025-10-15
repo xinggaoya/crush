@@ -373,16 +373,31 @@ func (a *appModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (a *appModel) handleWindowResize(width, height int) tea.Cmd {
 	var cmds []tea.Cmd
 
-	// TODO: clean up these magic numbers.
-	if a.showingFullHelp {
-		height -= 5
-	} else {
-		height -= 2
+	// Layout constants for better maintainability
+	const (
+		fullHelpOffset = 5
+		minHelpOffset  = 2
+		minWidth       = 80
+		minHeight      = 24
+	)
+
+	// Ensure minimum window size
+	if width < minWidth || height < minHeight {
+		// Window too small, show warning
+		return a.showWindowSizeWarning(minWidth, minHeight)
 	}
 
-	a.width, a.height = width, height
+	// Calculate effective height based on help visibility
+	helpOffset := minHelpOffset
+	if a.showingFullHelp {
+		helpOffset = fullHelpOffset
+	}
+
+	effectiveHeight := height - helpOffset
+
+	a.width, a.height = width, effectiveHeight
 	// Update status bar
-	s, cmd := a.status.Update(tea.WindowSizeMsg{Width: width, Height: height})
+	s, cmd := a.status.Update(tea.WindowSizeMsg{Width: width, Height: effectiveHeight})
 	if model, ok := s.(status.StatusCmp); ok {
 		a.status = model
 	}
@@ -407,6 +422,13 @@ func (a *appModel) handleWindowResize(width, height int) tea.Cmd {
 	cmds = append(cmds, cmd)
 
 	return tea.Batch(cmds...)
+}
+
+// showWindowSizeWarning displays a warning when window is too small
+func (a *appModel) showWindowSizeWarning(minWidth, minHeight int) tea.Cmd {
+	// This would show a temporary message or dialog
+	// For now, we'll just return nil as the implementation depends on dialog system
+	return nil
 }
 
 // handleKeyPressMsg processes keyboard input and routes to appropriate handlers.

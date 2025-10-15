@@ -34,6 +34,7 @@ type App struct {
 	CoderAgent agent.Service
 
 	LSPClients *csync.Map[string, *lsp.Client]
+	lspPool    *LSPConnectionPool
 
 	config *config.Config
 
@@ -70,7 +71,7 @@ func New(ctx context.Context, conn *sql.DB, cfg *config.Config) (*App, error) {
 
 		config: cfg,
 
-		events:          make(chan tea.Msg, 100),
+		events:          make(chan tea.Msg, 256), // Increased buffer size for better performance
 		serviceEventsWG: &sync.WaitGroup{},
 		tuiWG:           &sync.WaitGroup{},
 	}
@@ -244,13 +245,30 @@ func setupSubscriber[T any](
 					return
 				}
 				var msg tea.Msg = event
-				select {
-				case outputCh <- msg:
-				case <-time.After(2 * time.Second):
-					slog.Warn("message dropped due to slow consumer", "name", name)
-				case <-ctx.Done():
-					slog.Debug("subscription cancelled", "name", name)
-					return
+
+				// Implement better backpressure control with retry mechanism
+				const maxRetries = 3
+				retryDelay := 100 * time.Millisecond
+				messageSent := false
+
+				for attempt := 0; attempt < maxRetries && !messageSent; attempt++ {
+					select {
+					case outputCh <- msg:
+						// Message sent successfully
+						messageSent = true
+					case <-time.After(retryDelay):
+						// Exponential backoff
+						retryDelay *= 2
+						if attempt == maxRetries-1 {
+							slog.Warn("message dropped after retries", "name", name, "attempts", maxRetries)
+							messageSent = true // Break out to avoid infinite loop
+						} else {
+							slog.Debug("retrying message send", "name", name, "attempt", attempt+1)
+						}
+					case <-ctx.Done():
+						slog.Debug("subscription cancelled", "name", name)
+						return
+					}
 				}
 			case <-ctx.Done():
 				slog.Debug("subscription cancelled", "name", name)
@@ -325,7 +343,12 @@ func (app *App) Shutdown() {
 		app.CoderAgent.CancelAll()
 	}
 
-	// Shutdown all LSP clients.
+	// Shutdown LSP connection pool
+	if app.lspPool != nil {
+		app.lspPool.Shutdown(app.globalCtx)
+	}
+
+	// Shutdown any remaining LSP clients that aren't in the pool
 	for name, client := range app.LSPClients.Seq2() {
 		shutdownCtx, cancel := context.WithTimeout(app.globalCtx, 5*time.Second)
 		if err := client.Close(shutdownCtx); err != nil {
