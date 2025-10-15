@@ -1,4 +1,4 @@
-module github.com/charmbracelet/crush
+module github.com/xinggaoya/crush
 
 go 1.25.0
 
@@ -15,6 +15,7 @@ require (
 	github.com/charmbracelet/bubbles/v2 v2.0.0-beta.1.0.20250820203609-601216f68ee2
 	github.com/charmbracelet/bubbletea/v2 v2.0.0-beta.4.0.20251011205917-3b687ffc1619
 	github.com/charmbracelet/catwalk v0.6.4
+	github.com/charmbracelet/crush v0.11.1
 	github.com/charmbracelet/fang v0.4.3
 	github.com/charmbracelet/glamour/v2 v2.0.0-20250811143442-a27abb32f018
 	github.com/charmbracelet/lipgloss/v2 v2.0.0-beta.3.0.20250917201909-41ff0bf215ea
@@ -86,7 +87,7 @@ require (
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
-	github.com/fsnotify/fsnotify v1.9.0 // indirect
+	github.com/fsnotify/fsnotify v1.9.0
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -119,7 +120,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/posthog/posthog-go v1.6.11
 	github.com/rivo/uniseg v0.4.7
-	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
 	github.com/sethvargo/go-retry v0.3.0 // indirect
 	github.com/sourcegraph/jsonrpc2 v0.2.1 // indirect
 	github.com/spf13/pflag v1.0.9 // indirect

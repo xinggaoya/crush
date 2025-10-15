@@ -84,6 +84,8 @@ github.com/charmbracelet/catwalk v0.6.4 h1:zFHtuP94mSDE48nST3DS3a37wfsQqNcVnsFkS
 github.com/charmbracelet/catwalk v0.6.4/go.mod h1:ReU4SdrLfe63jkEjWMdX2wlZMV3k9r11oQAmzN0m+KY=
 github.com/charmbracelet/colorprofile v0.3.2 h1:9J27WdztfJQVAQKX2WOlSSRB+5gaKqqITmrvb1uTIiI=
 github.com/charmbracelet/colorprofile v0.3.2/go.mod h1:mTD5XzNeWHj8oqHb+S1bssQb7vIHbepiebQ2kPKVKbI=
+github.com/charmbracelet/crush v0.11.1 h1:KO6wBmY5RGRpF4T7ZeZqJYQgVjShRNEOVXiSUjs5+w0=
+github.com/charmbracelet/crush v0.11.1/go.mod h1:AVr3YWr69HxOeI765Buuov7iQ+c2DXRMplMo8UDYs/A=
 github.com/charmbracelet/fang v0.4.3 h1:qXeMxnL4H6mSKBUhDefHu8NfikFbP/MBNTfqTrXvzmY=
 github.com/charmbracelet/fang v0.4.3/go.mod h1:wHJKQYO5ReYsxx+yZl+skDtrlKO/4LLEQ6EXsdHhRhg=
 github.com/charmbracelet/glamour/v2 v2.0.0-20250811143442-a27abb32f018 h1:PU4Zvpagsk5sgaDxn5W4sxHuLp9QRMBZB3bFSk40A4w=
