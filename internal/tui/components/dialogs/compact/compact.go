@@ -7,11 +7,11 @@ import (
 	tea "github.com/charmbracelet/bubbletea/v2"
 	"github.com/charmbracelet/lipgloss/v2"
 
-	"github.com/charmbracelet/crush/internal/llm/agent"
-	"github.com/charmbracelet/crush/internal/tui/components/core"
-	"github.com/charmbracelet/crush/internal/tui/components/dialogs"
-	"github.com/charmbracelet/crush/internal/tui/styles"
-	"github.com/charmbracelet/crush/internal/tui/util"
+	"github.com/xinggaoya/crush/internal/llm/agent"
+	"github.com/xinggaoya/crush/internal/tui/components/core"
+	"github.com/xinggaoya/crush/internal/tui/components/dialogs"
+	"github.com/xinggaoya/crush/internal/tui/styles"
+	"github.com/xinggaoya/crush/internal/tui/util"
 )
 
 const CompactDialogID dialogs.DialogID = "compact"

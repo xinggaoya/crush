@@ -13,7 +13,7 @@ import (
 
 	md "github.com/JohannesKaufmann/html-to-markdown"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/charmbracelet/crush/internal/permission"
+	"github.com/xinggaoya/crush/internal/permission"
 )
 
 type FetchParams struct {

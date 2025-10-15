@@ -4,9 +4,9 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/charmbracelet/crush/internal/db"
-	"github.com/charmbracelet/crush/internal/event"
-	"github.com/charmbracelet/crush/internal/pubsub"
+	"github.com/xinggaoya/crush/internal/db"
+	"github.com/xinggaoya/crush/internal/event"
+	"github.com/xinggaoya/crush/internal/pubsub"
 	"github.com/google/uuid"
 )
 

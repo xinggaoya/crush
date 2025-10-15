@@ -6,9 +6,9 @@ import (
 	"github.com/charmbracelet/bubbles/v2/spinner"
 	"github.com/charmbracelet/bubbles/v2/textinput"
 	tea "github.com/charmbracelet/bubbletea/v2"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/home"
-	"github.com/charmbracelet/crush/internal/tui/styles"
+	"github.com/xinggaoya/crush/internal/config"
+	"github.com/xinggaoya/crush/internal/home"
+	"github.com/xinggaoya/crush/internal/tui/styles"
 	"github.com/charmbracelet/lipgloss/v2"
 )
 

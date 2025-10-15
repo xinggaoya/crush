@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/charmbracelet/crush/internal/permission"
+	"github.com/xinggaoya/crush/internal/permission"
 )
 
 type DownloadParams struct {

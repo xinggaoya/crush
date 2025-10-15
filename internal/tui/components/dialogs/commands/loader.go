@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	tea "github.com/charmbracelet/bubbletea/v2"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/home"
-	"github.com/charmbracelet/crush/internal/tui/util"
+	"github.com/xinggaoya/crush/internal/config"
+	"github.com/xinggaoya/crush/internal/home"
+	"github.com/xinggaoya/crush/internal/tui/util"
 )
 
 const (

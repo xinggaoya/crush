@@ -4,7 +4,7 @@ import (
 	"slices"
 
 	tea "github.com/charmbracelet/bubbletea/v2"
-	"github.com/charmbracelet/crush/internal/tui/util"
+	"github.com/xinggaoya/crush/internal/tui/util"
 	"github.com/charmbracelet/lipgloss/v2"
 )
 

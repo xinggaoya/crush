@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/charmbracelet/crush/internal/app"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/lsp"
-	"github.com/charmbracelet/crush/internal/tui/components/core"
-	"github.com/charmbracelet/crush/internal/tui/styles"
+	"github.com/xinggaoya/crush/internal/app"
+	"github.com/xinggaoya/crush/internal/config"
+	"github.com/xinggaoya/crush/internal/csync"
+	"github.com/xinggaoya/crush/internal/lsp"
+	"github.com/xinggaoya/crush/internal/tui/components/core"
+	"github.com/xinggaoya/crush/internal/tui/styles"
 	"github.com/charmbracelet/lipgloss/v2"
 	"github.com/charmbracelet/x/powernap/pkg/lsp/protocol"
 )

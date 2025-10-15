@@ -11,12 +11,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/diff"
-	"github.com/charmbracelet/crush/internal/fsext"
-	"github.com/charmbracelet/crush/internal/history"
-	"github.com/charmbracelet/crush/internal/lsp"
-	"github.com/charmbracelet/crush/internal/permission"
+	"github.com/xinggaoya/crush/internal/csync"
+	"github.com/xinggaoya/crush/internal/diff"
+	"github.com/xinggaoya/crush/internal/fsext"
+	"github.com/xinggaoya/crush/internal/history"
+	"github.com/xinggaoya/crush/internal/lsp"
+	"github.com/xinggaoya/crush/internal/permission"
 )
 
 type MultiEditOperation struct {

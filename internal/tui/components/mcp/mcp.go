@@ -5,10 +5,10 @@ import (
 
 	"github.com/charmbracelet/lipgloss/v2"
 
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/llm/agent"
-	"github.com/charmbracelet/crush/internal/tui/components/core"
-	"github.com/charmbracelet/crush/internal/tui/styles"
+	"github.com/xinggaoya/crush/internal/config"
+	"github.com/xinggaoya/crush/internal/llm/agent"
+	"github.com/xinggaoya/crush/internal/tui/components/core"
+	"github.com/xinggaoya/crush/internal/tui/styles"
 )
 
 // RenderOptions contains options for rendering MCP lists.

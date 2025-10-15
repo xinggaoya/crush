@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/message"
+	"github.com/xinggaoya/crush/internal/config"
+	"github.com/xinggaoya/crush/internal/message"
 	"github.com/openai/openai-go"
 	"github.com/openai/openai-go/option"
 )

@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/env"
+	"github.com/xinggaoya/crush/internal/csync"
+	"github.com/xinggaoya/crush/internal/env"
 	"github.com/tidwall/sjson"
 )
 

@@ -3,9 +3,9 @@ package agent
 import (
 	"time"
 
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/event"
-	"github.com/charmbracelet/crush/internal/llm/provider"
+	"github.com/xinggaoya/crush/internal/config"
+	"github.com/xinggaoya/crush/internal/event"
+	"github.com/xinggaoya/crush/internal/llm/provider"
 )
 
 func (a *agent) eventPromptSent(sessionID string) {

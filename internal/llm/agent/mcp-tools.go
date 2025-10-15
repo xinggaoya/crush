@@ -15,13 +15,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/home"
-	"github.com/charmbracelet/crush/internal/llm/tools"
-	"github.com/charmbracelet/crush/internal/permission"
-	"github.com/charmbracelet/crush/internal/pubsub"
-	"github.com/charmbracelet/crush/internal/version"
+	"github.com/xinggaoya/crush/internal/config"
+	"github.com/xinggaoya/crush/internal/csync"
+	"github.com/xinggaoya/crush/internal/home"
+	"github.com/xinggaoya/crush/internal/llm/tools"
+	"github.com/xinggaoya/crush/internal/permission"
+	"github.com/xinggaoya/crush/internal/pubsub"
+	"github.com/xinggaoya/crush/internal/version"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 

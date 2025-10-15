@@ -7,8 +7,8 @@ import (
 	"os"
 
 	tea "github.com/charmbracelet/bubbletea/v2"
-	"github.com/charmbracelet/crush/internal/tui/components/anim"
-	"github.com/charmbracelet/crush/internal/tui/styles"
+	"github.com/xinggaoya/crush/internal/tui/components/anim"
+	"github.com/xinggaoya/crush/internal/tui/styles"
 	"github.com/charmbracelet/x/ansi"
 )
 
